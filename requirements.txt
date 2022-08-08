@@ -1,0 +1,11 @@
+wget
+asyncio
+pyrogram==1.0.1
+tgcrypto
+oauth2client
+psycopg2-binary
+sqlalchemy
+httplib2
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
