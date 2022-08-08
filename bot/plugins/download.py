@@ -17,13 +17,13 @@ def _telegram_file(client, message):
     given_name = idsDB.search_pname(user_id)
     print(given_name)
     if given_name == 'hola':
-        gname = find_starttostr(rname,0,')') + ')'
+        gname = find_starttostr(rname,0,')') + ')' + '.mp4'
     else:
-        gname = given_name + ' အပိုင်း ' + find_betweentwostr(rname, '(', ')')
+        gname = given_name + ' အပိုင်း(' + find_betweentwostr(rname, '(', ')') + ').mp4'
     
     print(gname)
 
-    sent_message = message.reply_text('🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**'+gname+'.mp4', quote=True)
+    sent_message = message.reply_text('🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**'+gname , quote=True)
     if message.document:
         file = message.document
     elif message.video:
@@ -34,7 +34,7 @@ def _telegram_file(client, message):
     LOGGER.info(f'Download:{user_id}: {file.file_id}')
     try:
         dl_name = os.path.join(f'{DOWNLOAD_DIRECTORY}/{gname}')
-        file_path = message.download(file_name=dl_name+').mp4')
+        file_path = message.download(file_name=dl_name)
         sent_message.edit(Messages.DOWNLOADED_SUCCESSFULLY.format(os.path.basename(file_path), humanbytes(os.path.getsize(file_path))))
         msg = GoogleDrive(user_id).upload_file(file_path, file.mime_type)
         sent_message.reply_text(msg)
