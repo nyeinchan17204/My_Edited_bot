@@ -19,7 +19,7 @@ ep_num = {}
 @Client.on_message(filters.command('ep'))
 async def text_msg(client, message):
         if len(message.command) > 1:
-            message_ids = message.id + 1
+            message_ids = message.message_id + 1
             message_texts = message.text
             ep_num[message_ids] = message.command[1]
             print(ep_num)
@@ -35,7 +35,7 @@ async def text_msg(client, message):
 )
 def _telegram_file(client, message):
     user_id = message.from_user.id
-    message_ids = message.id
+    message_ids = message.message_id
     name_caption = message.caption
     movie_name = idsDB.search_pname(user_id)
     final_name = 'movie name'
@@ -50,7 +50,7 @@ def _telegram_file(client, message):
         else:
             final_name = name_spliter[0] + ".mp4"
     print(final_name)
-    sent_message = message.reply_text("🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**")
+    sent_message = message.reply_txt("🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**"+ final_name, quote=True)
     if message.document:
         file = message.document
     elif message.video:
@@ -64,7 +64,7 @@ def _telegram_file(client, message):
         file_path = message.download(file_name=dl_name)
         sent_message.edit(Messages.DOWNLOADED_SUCCESSFULLY.format(os.path.basename(file_path), humanbytes(os.path.getsize(file_path))))
         msg = GoogleDrive(user_id).upload_file(file_path, file.mime_type)
-        sent_message.reply_text(msg)
+        sent_message.reply_txt(msg)
     except RPCError:
         sent_message.edit(Messages.WENT_WRONG)
     LOGGER.info(f"Deleteing: {file_path}")
