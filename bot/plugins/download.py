@@ -48,29 +48,19 @@ def _telegram_file(client, message):
             final_name = name_spliter[0] + name_spliter[1] + name_spliter[2] + ".mp4"
         else:
             final_name = name_spliter[0] + ".mp4"
-    sent_message = message.reply_text(
-        "🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**" + final_name, quote=True
-    )
+    sent_message = message.reply_text("🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**" + final_name, quote=True)
     if message.document:
         file = message.document
     elif message.video:
         file = message.video
     elif message.audio:
         file = message.audio
-    sent_message.edit(
-        Messages.DOWNLOAD_TG_FILE.format(
-            file.file_name, humanbytes(file.file_size), file.mime_type
-        )
-    )
+    sent_message.edit(Messages.DOWNLOAD_TG_FILE.format(file.file_name, humanbytes(file.file_size), file.mime_type))
     LOGGER.info(f"Download:{user_id}: {file.file_id}")
     try:
         dl_name = os.path.join(f"{DOWNLOAD_DIRECTORY}/{final_name}")
         file_path = message.download(file_name=dl_name)
-        sent_message.edit(
-            Messages.DOWNLOADED_SUCCESSFULLY.format(
-                os.path.basename(file_path), humanbytes(os.path.getsize(file_path))
-            )
-        )
+        sent_message.edit(Messages.DOWNLOADED_SUCCESSFULLY.format(os.path.basename(file_path), humanbytes(os.path.getsize(file_path))))
         msg = GoogleDrive(user_id).upload_file(file_path, file.mime_type)
         sent_message.reply_text(msg)
     except RPCError:
