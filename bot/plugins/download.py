@@ -17,7 +17,7 @@ ep_num = {}
 
 
 @Client.on_message(filters.command('ep'))
-async def text_msg(client, message):
+    def text_msg(client, message):
         if len(message.command) > 1:
             message_ids = message.id + 1
             message_texts = message.text
@@ -36,6 +36,7 @@ async def text_msg(client, message):
 def _telegram_file(client, message):
     user_id = message.from_user.id
     message_ids = message.id
+    print(message_ids)
     name_caption = message.caption
     movie_name = idsDB.search_pname(user_id)
     print(movie_name)
