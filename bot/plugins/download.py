@@ -50,7 +50,7 @@ def _telegram_file(client, message):
         else:
             final_name = name_spliter[0] + ".mp4"
     print(final_name)
-    sent_message = message.reply_text("🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**", quote=True)
+    sent_message = message.reply_text("🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**")
     if message.document:
         file = message.document
     elif message.video:
