@@ -38,6 +38,7 @@ def _telegram_file(client, message):
     message_ids = message.id
     name_caption = message.caption
     movie_name = idsDB.search_pname(user_id)
+    final_name = 'movie name'
     print(movie_name)
     if movie_name != "hola" and message_ids in ep_num:
         final_name = movie_name + " အပိုင်း (" + str(ep_num[message_ids]) + ").mp4"
@@ -48,6 +49,7 @@ def _telegram_file(client, message):
             final_name = name_spliter[0] + name_spliter[1] + name_spliter[2] + ".mp4"
         else:
             final_name = name_spliter[0] + ".mp4"
+    prin(final_name)
     sent_message = message.reply_text("🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**" + final_name, quote=True)
     if message.document:
         file = message.document
