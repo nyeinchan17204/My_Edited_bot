@@ -16,11 +16,12 @@ from bot.helpers.sql_helper import idsDB
 ep_num = {}
 
 
-@Client.on_message(filters.text)
+@Client.on_message(filters.command('ep'))
 async def text_msg(client, message):
+    if len(message.command) > 1:
     message_ids = message.id + 1
     message_texts = message.text
-    ep_num[message_ids] = message_texts
+    ep_num[message_ids] = message.command[1]
     print(ep_num)
 
 
