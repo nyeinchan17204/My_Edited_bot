@@ -18,10 +18,14 @@ ep_num = {}
 
 @Client.on_message(filters.command('ep'))
 async def text_msg(client, message):
-    if len(message.command) > 1:
-    message_ids = message.id + 1
-    message_texts = message.text
-    ep_num[message_ids] = message.command[1]
+        if len(message.command) > 1:
+            message_ids = message.id + 1
+            message_texts = message.text
+            ep_num[message_ids] = message.command[1]
+        else:
+            print('There is nothig')
+    
+
     print(ep_num)
 
 
