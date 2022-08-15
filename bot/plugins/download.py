@@ -71,5 +71,6 @@ def _telegram_file(client, message):
     os.remove(file_path)
     if message_ids in ep_num:
         ep_num.pop(message_ids)
+        print('Finish delete dir')
     else:
         print("noting input")
