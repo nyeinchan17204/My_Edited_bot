@@ -41,7 +41,7 @@ def _telegram_file(client, message):
     final_name = 'movie name'
     print(movie_name)
     if movie_name != "hola" and message_ids in ep_num:
-        final_name = movie_name + " အပိုင်း (" + str(ep_num[message_ids]) + ").mp4"
+        final_name = movie_name + " အပိုင်း(" + str(ep_num[message_ids]) + ").mp4"
     else:
         name_spliter = name_caption.splitlines()
         print(len(name_spliter))
@@ -70,6 +70,6 @@ def _telegram_file(client, message):
     LOGGER.info(f"Deleteing: {file_path}")
     os.remove(file_path)
     if message_ids in ep_num:
-        ep_num.clear()
+        ep_num.pop(message_ids)
     else:
         print("noting input")
