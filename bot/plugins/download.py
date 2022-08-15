@@ -50,14 +50,14 @@ def _telegram_file(client, message):
         else:
             final_name = name_spliter[0] + ".mp4"
     print(final_name)
-    sent_message = message.reply_text("🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**"+ final_name, quote=True)
+    sent_message = message.reply_text("🕵️**.ဖိုင်လင့်ကိုစစ်ဆေးနေပါသည်...**", quote=True)
     if message.document:
         file = message.document
     elif message.video:
         file = message.video
     elif message.audio:
         file = message.audio
-    sent_message.edit(Messages.DOWNLOAD_TG_FILE.format(file.file_name, humanbytes(file.file_size), file.mime_type))
+    sent_message.edit(Messages.DOWNLOAD_TG_FILE.format(final_name, humanbytes(file.file_size), file.mime_type))
     LOGGER.info(f"Download:{user_id}: {file.file_id}")
     try:
         dl_name = os.path.join(f"{DOWNLOAD_DIRECTORY}/{final_name}")
@@ -70,6 +70,6 @@ def _telegram_file(client, message):
     LOGGER.info(f"Deleteing: {file_path}")
     os.remove(file_path)
     if message_ids in ep_num:
-        ep_num.pop[message_ids]
+        ep_num.clear()
     else:
         print("noting input")
